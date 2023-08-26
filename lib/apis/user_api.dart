@@ -1,7 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:twitter_clone/constants/appwrite_constants.dart';
 import 'package:twitter_clone/core/core.dart';
@@ -9,7 +8,7 @@ import 'package:twitter_clone/core/providers.dart';
 import 'package:twitter_clone/models/user_model.dart';
 
 final userAPIProvider = Provider((ref) {
-  return UserAPI(db: ref.watch(appWritedatabaseProvider));
+  return UserAPI(db: ref.watch(appWriteDatabaseProvider));
 });
 
 abstract class IUserAPI {
