@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'package:twitter_clone/core/enums/tweet_type_enum.dart';
@@ -61,13 +59,13 @@ class Tweet {
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
+
     result.addAll({'text': text});
     result.addAll({'hashtags': hashtags});
     result.addAll({'link': link});
     result.addAll({'imageLinks': imageLinks});
     result.addAll({'uid': uid});
-    result.addAll({'tweetType': tweetType.toString()});
+    result.addAll({'tweetType': tweetType.type});
     result.addAll({'tweetedAt': tweetedAt.millisecondsSinceEpoch});
     result.addAll({'likes': likes});
     result.addAll({'commentIds': commentIds});
@@ -100,37 +98,32 @@ class Tweet {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Tweet &&
-      other.text == text &&
-      listEquals(other.hashtags, hashtags) &&
-      other.link == link &&
-      listEquals(other.imageLinks, imageLinks) &&
-      other.uid == uid &&
-      other.tweetType == tweetType &&
-      other.tweetedAt == tweetedAt &&
-      listEquals(other.likes, likes) &&
-      listEquals(other.commentIds, commentIds) &&
-      other.id == id &&
-      other.reshareCount == reshareCount;
+        other.text == text &&
+        listEquals(other.hashtags, hashtags) &&
+        other.link == link &&
+        listEquals(other.imageLinks, imageLinks) &&
+        other.uid == uid &&
+        other.tweetType == tweetType &&
+        other.tweetedAt == tweetedAt &&
+        listEquals(other.likes, likes) &&
+        listEquals(other.commentIds, commentIds) &&
+        other.id == id &&
+        other.reshareCount == reshareCount;
   }
 
   @override
   int get hashCode {
     return text.hashCode ^
-      hashtags.hashCode ^
-      link.hashCode ^
-      imageLinks.hashCode ^
-      uid.hashCode ^
-      tweetType.hashCode ^
-      tweetedAt.hashCode ^
-      likes.hashCode ^
-      commentIds.hashCode ^
-      id.hashCode ^
-      reshareCount.hashCode;
+        hashtags.hashCode ^
+        link.hashCode ^
+        imageLinks.hashCode ^
+        uid.hashCode ^
+        tweetType.hashCode ^
+        tweetedAt.hashCode ^
+        likes.hashCode ^
+        commentIds.hashCode ^
+        id.hashCode ;
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Tweet.fromJson(String source) => Tweet.fromMap(json.decode(source));
 }
