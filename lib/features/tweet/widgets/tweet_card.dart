@@ -113,7 +113,7 @@ class TweetCard extends ConsumerWidget {
                                   size: 25,
                                   isLiked: tweet.likes.contains(currentUser.$id),
                                   onTap: (isLiked) async {
-                                    ref.read(tweetControllerProvider.notifier).likeTweet(tweet, currentUser.$id );
+                                    ref.read(tweetControllerProvider.notifier).likeTweet(tweet, currentUser );
                                     return !isLiked;
                                   },
                                   likeBuilder: (isLiked) {

@@ -14,8 +14,12 @@ final tweetControllerProvider = StateNotifierProvider<TweetController, bool>(
   (ref) {
     return TweetController(
       ref: ref,
-      tweetAPI: ref.watch(tweetAPIProvider),
-      storageAPI: ref.watch(storageAPIProvider),
+      tweetAPI: ref.watch(
+        tweetAPIProvider
+      ),
+      storageAPI: ref.watch(
+        storageAPIProvider
+      ),
     );
   },
 );
@@ -43,23 +47,22 @@ class TweetController extends StateNotifier<bool> {
         _storageAPI = storageAPI,
         super(false);
 
-  Future<List<Tweet>> getTweets() async {
-    final tweetList = await _tweetAPI.getTweets();
-    return tweetList.map((tweet) => Tweet.fromMap(tweet.data)).toList();
-  }
+        Future<List<Tweet>> getTweets() async {
+          final tweetList = await _tweetAPI.getTweets();
+          return tweetList.map((tweet) => Tweet.fromMap(tweet.data)).toList();
+        }
 
-  void likeTweet(Tweet tweet, UserModel user) async {
-    List<String> likes = tweet.likes;
-    if (likes.contains(user.uid)) {
-      likes.remove(user.uid);
-    } else {
-      likes.add(user.uid);
-    }
-    tweet = tweet.copyWith(likes: likes);
-    final res = await _tweetAPI.likeTweet(tweet);
-    res.fold((l) => null, (r) => null);
+void likeTweet(Tweet tweet, UserModel user) async {
+  List<String> likes = tweet.likes;
+  if (likes.contains(user.uid)) {
+    likes.remove(user.uid);
+  } else {
+    likes.add(user.uid);
   }
-
+  tweet = tweet.copyWith(likes: likes);
+  final res = await _tweetAPI.likeTweet(tweet);
+  res.fold((l) => null, (r) => null);
+}
   void shareTweet({
     required List<File> images,
     required String text,
